@@ -11,46 +11,46 @@ servers:
   - url: https://apiserver1.sunnyadeshara.in/v1
   - url: https://apiserver2.sunnyadeshara.in/v1
 paths:
-  /resource:
-    description: An appointment resource
+  /appointment:
+    description: An appointment
     get:
-      description: Operations to manage an appointment resource
+      description: Operations to manage an appointment
       parameters:
         - in: query
-          name: resourceName
+          name: title
           required: true
           schema:
             type: string
-            example: Doctor
+            example: Appointment for doctor
       responses:
         200:
           description: Success response
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/resources'
+                $ref: '#/components/schemas/appointments'
     post:
-      description: Add a new resource
+      description: Add a new appointment
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/resource'
+              $ref: '#/components/schemas/appointment'
       responses:
         201:
           description: Successfully added!
     put:
-      description: Add a new resource
+      description: Add a new appointment
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/resource'
+              $ref: '#/components/schemas/appointment'
       responses:
         201:
           description: Successfully updated!
   /resource/{id}:
-    description: Get resource based on id
+    description: Get appointment based on id
     get:
       parameters:
         - in: path
@@ -60,38 +60,38 @@ paths:
             type: integer
       responses:
         200:
-          description: Resource found successfully!
+          description: Appointment found successfully!
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/resource'
+                $ref: '#/components/schemas/appointment'
             application/xml:
               schema:
-                $ref: '#/components/schemas/resource'
+                $ref: '#/components/schemas/appointment'
 components:
   schemas:
-    resource:
+    appointment:
       type: object
       properties:
-        ResourceID:
+        AppointmentID:
           type: integer
           example: 3
-        ResourceName:
+        Title:
           type: string
           example: Doctor
-        Description:
+        Resource:
           type: string
           example: For doctor's appointment
-    resources:
+    appointments:
       type: array
       items:
         properties:
-          ResourceID:
+          AppointmentID:
             type: integer
             example: 3
-          ResourceName:
+          Title:
             type: string
             example: Doctor
-          Description:
-            type: string
-            example: For doctor's appointment
+          Resource:
+            type: integer
+            example: 1
