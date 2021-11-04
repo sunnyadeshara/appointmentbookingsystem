@@ -1,0 +1,97 @@
+openapi: 3.0.0
+info:
+  title: Resources API
+  description: Resource Demo API by Sunny Adeshara
+  contact:
+    name: Sunny Adeshara
+    email: sunnyadeshara@gmail.com
+    url: apis.sunnyadeshara.in
+  version: 1.0.0
+servers:
+  - url: https://apiserver1.sunnyadeshara.in/v1
+  - url: https://apiserver2.sunnyadeshara.in/v1
+paths:
+  /resource:
+    description: An appointment resource
+    get:
+      description: Operations to manage an appointment resource
+      parameters:
+        - in: query
+          name: resourceName
+          required: true
+          schema:
+            type: string
+            example: Doctor
+      responses:
+        200:
+          description: Success response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/resources'
+    post:
+      description: Add a new resource
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/resource'
+      responses:
+        201:
+          description: Successfully added!
+    put:
+      description: Add a new resource
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/resource'
+      responses:
+        201:
+          description: Successfully updated!
+  /resource/{id}:
+    description: Get resource based on id
+    get:
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          description: Student found successfully!
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/resource'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/resource'
+components:
+  schemas:
+    resource:
+      type: object
+      properties:
+        ResourceID:
+          type: integer
+          example: 3
+        ResourceName:
+          type: string
+          example: Doctor
+        Description:
+          type: string
+          example: For doctor's appointment
+    resources:
+      type: array
+      items:
+        properties:
+          ResourceID:
+            type: integer
+            example: 3
+          ResourceName:
+            type: string
+            example: Doctor
+          Description:
+            type: string
+            example: For doctor's appointment
