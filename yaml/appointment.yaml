@@ -49,7 +49,7 @@ paths:
       responses:
         201:
           description: Successfully updated!
-  /resource/{id}:
+  /appointment/{id}:
     description: Get appointment based on id
     get:
       parameters:
